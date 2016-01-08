@@ -9,28 +9,19 @@
          {:state (r/atom init-state)
           :event-log (r/atom [])}))
 
-(defn handle [system event]
+(defn send [system event-type & args]
   (let [{:keys [handlers event-log]} system
-        event-type (:type event)]
+        event (apply vector event-type args)]
     (swap! event-log conj event)
     (if-let [handler (handlers event-type)]
-      (handler system event)
-      (if (= type :unhandled-event)
+      (apply handler system args)
+      (if (= event-type :unhandled-event)
         (println "unhandled event:" (:event event))
-        (handle system {:type :unhandled-event
-                        :event event})))))
+        (send system :unhandled-event event)))))
 
-(defn make-event [event-type & [event-data]]
-  (assoc event-data
-         :type event-type))
-
-(defn send [system event-type & [event-data]]
-  (handle system (make-event event-type event-data)))
-
-(defn query [system query]
+(defn query [system query-key & args]
   (let [{:keys [queries state]} system
-        [key & args] query
-        query-fn (key queries)]
+        query-fn (query-key queries)]
     (if query-fn
       (reaction (apply query-fn state args))
       (println "no query fn for key:" key))))
