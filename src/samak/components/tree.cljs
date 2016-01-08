@@ -1,7 +1,7 @@
 (ns samak.components.tree
   (:require
    [reagent.core :as reagent]
-   [reagent.ratom :refer [reaction]]
+   [reagent.ratom :refer-macros [reaction]]
    [revent.core :as rv]
    [clojure.zip :as z])
   (:require-macros

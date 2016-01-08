@@ -19,8 +19,8 @@
 
   :cljsbuild {
               :builds [{:id "devcards"
-                        :source-paths ["src"]
-                        :figwheel { :devcards true } ;; <- note this
+                        :source-paths ["src" "test"]
+                        :figwheel { :devcards true }
                         :compiler { :main       "samak.cards"
                                     :asset-path "js/compiled/devcards_out"
                                     :output-to  "resources/public/js/compiled/samak_devcards.js"
