@@ -1,4 +1,4 @@
-(ns samak.revent.core
+(ns revent.core
   (:require [reagent.core  :as r]
             [reagent.ratom :refer-macros [reaction]]))
 
