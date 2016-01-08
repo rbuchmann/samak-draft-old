@@ -6,7 +6,7 @@
   (z/zipper :children
             (comp seq :children)
             (fn [node children]
-              (with-meta {:children children} (meta node)))
+              (assoc node :children children))
             root))
 
 (defn nil-proof-handler [move]
