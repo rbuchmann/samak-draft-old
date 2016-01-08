@@ -1,3 +1,4 @@
 (ns samak.cards
-  (:require [samak.tree.component-test]
+  (:require [revent.core-test]
+            [samak.tree.component-test]
             [samak.tree.system-test]))

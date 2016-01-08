@@ -1,1 +1,5 @@
 /* samak CSS */
+
+.node.selected {
+  background: #AAF;
+}

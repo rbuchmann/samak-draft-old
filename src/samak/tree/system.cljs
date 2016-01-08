@@ -12,7 +12,7 @@
 (defn nil-proof-handler [move]
   (let [maybe-move (fn [loc]
                      (or (move loc) loc))]
-    (fn [system _]
+    (fn [system]
       (swap! (:state system) maybe-move))))
 
 (def tree-mov-handlers
@@ -26,7 +26,7 @@
 
 (defn select-and-root [loc & _]
   (-> @loc
-      (z-update assoc :selected true)
+      (z-update assoc :selected? true)
       z/root))
 
 (defn make-tree-system [root]
@@ -35,4 +35,4 @@
                   :queries {:root select-and-root}))
 
 (defn root-of [system]
-  (rv/query system [:root]))
+  (rv/query system :root))

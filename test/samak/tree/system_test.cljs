@@ -26,8 +26,7 @@
   (let [sys (ts/make-tree-system {:children [{:a 1}]
                                   :type :list})
         root (ts/root-of sys)]
-    (do
-      (rv/send sys :down)
-      (is (= @root
-             {:children [{:a 1 :selected true}]
-              :type :list})))))
+    (rv/send sys :down)
+    (is (= @root
+           {:children [{:a 1 :selected? true}]
+            :type :list}))))
