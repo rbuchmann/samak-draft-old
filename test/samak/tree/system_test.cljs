@@ -25,7 +25,7 @@
 (deftest root-of
   (let [sys (ts/make-tree-system {:children [{:a 1}]
                                   :type :list})
-        root (ts/root-of sys)]
+        root (rv/query sys :root)]
     (rv/send sys :down)
     (is (= @root
            {:children [{:a 1 :selected? true}]
