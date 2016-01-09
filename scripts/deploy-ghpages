@@ -1,0 +1,14 @@
+#!/bin/bash
+OLDBRANCH=`git rev-parse --abbrev-ref HEAD`
+git checkout -b buildjob
+lein do clean, cljsbuild once prod prodcards
+OLDMAIL=`git config user.email`
+OLDNAME=`git config user.name`
+git config user.email "bsteuber+ghbot@gmail.com" --replace-all
+git config user.name  "Bennis Github Bot" --replace-all
+git add resources/public/js/compiled/samak*.js -f && git commit -m "Build [skip ci]"
+git config user.email "$OLDMAIL" --replace-all
+git config user.name  "$OLDNAME" --replace-all
+git push git@github.com:rbuchmann/samak.git `git subtree split --prefix resources/public buildjob`:gh-pages --force
+git checkout "$OLDBRANCH"
+git branch -D buildjob
