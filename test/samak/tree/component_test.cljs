@@ -36,10 +36,12 @@
   (tc/node (assoc example-tree :selected? true)))
 
 (defcard-rg selected-sub-list
-  (tc/node (assoc-in example-tree [:children 2 :selected?] true)))
+  (tc/node (assoc-in example-tree [:children 2 :selected?]
+                     true)))
 
 (defcard-rg selected-sub-symbol
-  (tc/node (assoc-in example-tree [:children 2 :children 1 :selected?] true)))
+  (tc/node (assoc-in example-tree [:children 2 :children 1 :selected?]
+                     true)))
 
 (defn example-tree-system []
   (tc/tree (ts/make-tree-system example-tree)))

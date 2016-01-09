@@ -8,18 +8,13 @@
 
 (defn node [{:keys [selected?]
              :as node}]
-  ;(println "rendering node")
-  ;(pprint node)
   [:div.node {:class (when selected? :selected)}
    (render node)])
 
 (defmethod render :symbol [{:keys [label]}]
-  ;(println "rendering symbol" label)
   [:p label])
 
 (defmethod render :list [{:keys [children selected?]}]
-  ;(println "rendering list")
-  ;(pprint children)
   [:ul
    (map-indexed (fn [i child]
                   ^{:key i}
@@ -27,8 +22,6 @@
                 children)])
 
 (defn tree-view [root]
-  ;(println "rendering tree")
-  ;(pprint root)
   [:div.tree
    (node root)])
 
@@ -43,19 +36,17 @@
                      (when-let [event (-> key-event
                                           .-keyCode
                                           keymap)]
-                       ;(println "event:" event)
-                       (rv/send system event)
-                       ;(println "after" event)
-                       ;; (pprint @root)
-                       ))
+                       (rv/send system event)))
         tree-with-handler (with-meta tree-view
-                            {:component-did-mount (fn [x]
-                                                    (events/listen js/window
-                                                                   EventType.KEYDOWN
-                                                                   handle-key))
-                             :component-will-unmount (fn [x]
-                                                       (events/unlisten js/window
-                                                                        EventType.KEYDOWN
-                                                                        handle-key))})]
+                            {:component-did-mount
+                             (fn [x]
+                               (events/listen js/window
+                                              EventType.KEYDOWN
+                                              handle-key))
+                             :component-will-unmount
+                             (fn [x]
+                               (events/unlisten js/window
+                                                EventType.KEYDOWN
+                                                handle-key))})]
     (fn []
       [tree-with-handler @root])))

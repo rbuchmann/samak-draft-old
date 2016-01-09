@@ -33,6 +33,3 @@
   (rv/make-system :init-state (tree-zip root)
                   :handlers tree-mov-handlers
                   :queries {:root select-and-root}))
-
-(defn root-of [system]
-  (rv/query system :root))
