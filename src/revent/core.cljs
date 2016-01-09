@@ -10,6 +10,7 @@
           :event-log (r/atom [])}))
 
 (defn send [system event-type & args]
+  (println "Got event:" event-type)
   (let [{:keys [handlers event-log]} system
         event (apply vector event-type args)]
     (swap! event-log conj event)

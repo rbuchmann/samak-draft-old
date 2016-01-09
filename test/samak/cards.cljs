@@ -1,4 +1,7 @@
 (ns samak.cards
-  (:require [revent.core-test]
+  (:require [devcards.core :refer-macros [start-devcard-ui!]]
+            [revent.core-test]
             [samak.tree.component-test]
             [samak.tree.system-test]))
+
+(start-devcard-ui!)

@@ -17,15 +17,21 @@
 
   :source-paths ["src" "test"]
 
-  :cljsbuild {
-              :builds [{:id "devcards"
+  :cljsbuild {:builds [{:id "devcards"
                         :source-paths ["src" "test"]
-                        :figwheel { :devcards true }
-                        :compiler { :main       "samak.cards"
-                                    :asset-path "js/compiled/devcards_out"
-                                    :output-to  "resources/public/js/compiled/samak_devcards.js"
-                                    :output-dir "resources/public/js/compiled/devcards_out"
-                                    :source-map-timestamp true }}
+                        :figwheel {:devcards true}
+                        :compiler {:main       "samak.cards"
+                                   :asset-path "js/compiled/devcards_out"
+                                   :output-to  "resources/public/js/compiled/samak_cards.js"
+                                   :output-dir "resources/public/js/compiled/devcards_out"
+                                   :source-map-timestamp true }}
+                       {:id "prodcards"
+                        :source-paths ["src" "test"]
+                        :compiler {:main "samak.cards"
+                                   :devcards true
+                                   :asset-path "js/compiled/out"
+                                   :output-to  "resources/public/js/compiled/samak_cards.js"
+                                   :optimizations :advanced}}
                        {:id "dev"
                         :source-paths ["src"]
                         :figwheel true
@@ -40,5 +46,6 @@
                                    :asset-path "js/compiled/out"
                                    :output-to  "resources/public/js/compiled/samak.js"
                                    :optimizations :advanced}}]}
+
 
   :figwheel { :css-dirs ["resources/public/css"] })

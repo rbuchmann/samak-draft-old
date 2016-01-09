@@ -57,7 +57,11 @@ better or worse, you decide. The core ideas of Samak are:
   easily access a parser, how can I write an analyzer?
 - What are better ways to see a complex programs structure? Call
   graphs, automatic examples, searchable tests...?
-  
-** Getting Started (there's pretty much nothing yet though)
+
+** Seeing it in action
+- Almost nothing there yet..
+- [[http://rbuchmann.github.io/samak][Samak home page]]
+
+** Hacking
 - ~lein figwheel devcards~, wait for the REPL prompt
 - Browse to [[http://localhost:3449/cards.html]]
